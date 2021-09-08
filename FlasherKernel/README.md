@@ -25,7 +25,7 @@ For additional targets (such as QEMU), check the Makefile.
 
 ## Usage
 
-After startup, FlasherKernel will ask you to select a drive (0/1) on the IDE bus or do a software reset on the controller (r). When you select a drive, it will send a SCSI `INQUIRY` packet and attempt to identify the drive.
+After startup, FlasherKernel will ask you to select a drive (0/1 for master/slave) on the IDE bus or do a software reset on the controller (r). When you select a drive, it will send a SCSI `INQUIRY` packet and attempt to identify the drive.
 
 If it fails, you are prompted for selection again. Otherwise you are dropped into a very rudimentary command shell.
 
@@ -65,8 +65,11 @@ These commands could theoretically also work in non-recovery mode if one sends a
 ## Drive Memory Map
 
 ```
-0-1000 (?): Internal SRAM
-D800-E000 (?): Memory-mapped IO
+0-10000: RAM with some memory-mapped IO sprinkled in the higher ranges
 80000000-80040000: 256K drive cache
 90000000-90040000: 256K flash
 ```
+
+## Misc Notes
+
+ATA interrupt notifications are currently printed directly in `ATADevice::prologue()` without any queueing/synchronization, which can lead to slightly garbled screen output at times. If this gets annoying and you don't need the details provided by them, you can comment the two lines responsible for them.
