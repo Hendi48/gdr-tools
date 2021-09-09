@@ -1,0 +1,30 @@
+Usage:
+ SF8163 [drive:][directory]filename [drive_No] [/f] [/c] [/p] [/o] [/i] [/l] [/s] [/m] [/r]
+
+   filename     name of the download file.
+   [drive_No]   drive location number you want to update firmware.
+                drive location number is follows;
+                0:primary master
+                1:primary slave
+                2:secondary master
+                3:secondary slave
+                If DRIVE_NO is omitted, the drive is detected automatically.
+   [/f]         diable revision check
+   [/c]         diable vendor ID check
+   [/p]         diable product ID check
+   [/o]         diable OEM code check
+   [/i]         interactive mode
+   [/l]         create log file
+   [/s]         for SLOT type drive
+   [/m]         No messages (silent mode)
+   [/r]         recover ucom from critical condition.(recovery mode)
+
+For example, to flash an 8163B connected as the secondary slave with the 8050L 
+firmware from 8050L.dld:
+
+SF8163 8050L.dld 3 /f /c /p /o
+
+one or more of the "disable xxx" switches may not be needed, depending on the 
+firmware already installed on the drive. If you get a message saying there is no 
+CD/DVD drive, try the /r switch, but make sure you have specified the correct 
+drive first and maybe use the /i switch so you get one last chance to confirm it.
