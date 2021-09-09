@@ -9,3 +9,5 @@
 * 8164B_0L06_mod: Patched 8164B firmware that auto-switches to the Xbox partition when inserting an Xbox Game Disc. Very useful in PCs or Xbox with custom dashboard; does not work with original MS dashboard because it lacks the challenge/response mechanism
 * 8164B_0L06_orig: Original 8164B firmware for LG drives
 * PrepStub: Flasher stub (from the end of a DLD) as standalone binary
+
+Important: You must never write an unencrypted firmware to your flash by any means. The drive decrypts data whenever reading flash (unless IO flags are set at runtime that tell it to explicitly not decrypt), so that your firmware will come out garbled.
